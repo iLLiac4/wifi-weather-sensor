@@ -2,25 +2,26 @@
 #Introduction
 
 Low-cost Wireless Weather Monitoring System
+(this one is slightly modified code with option to enable calculation heat index in Fahrenheit or Celsius and also has an option to enable deep sleep to save energy. To enable deep sleep on ESP-01 module you have to solder one wire like on this picture. You do not need to remove LED. ![](http://zftlab.org/images/2014102801.jpg)
 
 #Purpose
 
 This system transmits temperature and humidity data to cloud on internet via Wifi and provides web interface to monitor those measured information.
 
-In this system, ESP8266 reads data from DHT22 sensor, then, send it to data.sparkfun.com cloud system using simple HTTP protocol. For web interface, all charts are implemented with Google Chart APIs. 
+In this system, ESP8266 reads data from DHT22, DHT21 or DHT11 sensor, then, send it to data.sparkfun.com cloud system using simple HTTP protocol. For web interface, all charts are implemented with Google Chart APIs. 
 
 #Prerequisites
 
 - Arduino IDE
-- ESP8266 package for Arduino IDE (*Refer to http://hpclab.blogspot.com/2015/06/esp8266-arduino-ide-on-mac-os-x.html for more information)
+- ESP8266 package for Arduino IDE
 
 Compiling and uploading is done in Arduino IDE with ESP8266 package installed. Therefore, basic knowledge about Arduino IDE is required to proceed following steps.   
 
 #Requirements
 ##Hardware
 
-- ESP8266 ( Around $3 on ebay )
-- DHT22 ( Around $7 on eBay )
+- ESP8266 (Around $3 on ebay)
+- DHT22 or DHT21 (almost the same as DHT22) (Around $3 on eBay) or DHT11 (not recommended since it is not accurate and only    suitable from 0-50 celsius) 
 - Resistor 10k(Pull up)
 
 To keep the cost low, ESP8266 is used as not only controller, but also Wifi transmitter. DHT22 sensor can be replaced by any other temperature sensor. Pull up resistor is used for the input pin of ESP8266.
@@ -46,7 +47,7 @@ BE CAREFUL! ESP8266 works with only 3.3v, not 5v!
 
 ###For running
 
-Connect ESP8266 to DHT22 temperature sensor. GPIO 2 pin of ESP8266 is used to read measured data of DHT22.
+Connect ESP8266 to DHT22, DHT11 or DHT21 (selectable in the code) temperature sensor. GPIO 2 or. GPIO 0 (selectable in the code) pin of ESP8266 is used to read measured data of DHT22.
 
 ![](https://github.com/briankimstudio/wifi-weather-sensor/blob/master/wifi-weather-sensor_bb.png)
 
@@ -116,5 +117,3 @@ Open HTML file with web browser, then you will see this chart right away. If you
 - http://phant.io/graphing/google/2014/07/07/graphing-data/
 - http://hpclab.blogspot.com/2015/06/esp8266-arduino-ide-on-mac-os-x.html
 - https://developers.google.com/chart/
-
-Leave comments on [blog](http://hpclab.blogspot.com/2015/06/esp8266-based-wifi-weather-monitoring.html)
