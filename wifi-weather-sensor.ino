@@ -9,14 +9,14 @@
 #include <ESP8266WiFi.h>
 #include "DHT.h"
 
-#define DHTPIN 0     // GPIO 0 pin of ESP8266
-//#define DHTPIN 2     // GPIO 2 pin of ESP8266
-#define DHTTYPE DHT11   // DHT 11
-//#define DHTTYPE DHT22   // DHT 22  (AM2302)
+//#define DHTPIN 0     // GPIO 0 pin of ESP8266
+#define DHTPIN 2     // GPIO 2 pin of ESP8266
+//#define DHTTYPE DHT11   // DHT 11
+#define DHTTYPE DHT22   // DHT 22  (AM2302)
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
-const char* ssid     = "iLLiac4";
-const char* password = "nonenone";
+const char* ssid     = "SSID";
+const char* password = "password";
 
 const char* host = "data.sparkfun.com";
 const char* publicKey = ".................";
@@ -128,6 +128,5 @@ void loop() {
   Serial.println();
   Serial.println("closing connection");
   delay(20*1000); // Send data every 20 seconds
-  // Send to sleep for 2 minutes
-  ESP.deepSleep(2*60000000);
+  ESP.deepSleep(2*60000000); // Send to sleep for 2 minutes
 }
