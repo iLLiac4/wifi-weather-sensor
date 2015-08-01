@@ -2,7 +2,10 @@
 #Introduction
 
 Low-cost Wireless Weather Monitoring System
-(this one is slightly modified code with option to enable calculation heat index in Fahrenheit or Celsius and also has an option to enable deep sleep to save energy. To enable deep sleep on ESP-01 module you have to solder one wire like on this picture. You do not need to remove LED. ![](http://zftlab.org/images/2014102801.jpg)
+(this one is slightly modified code with option to enable calculation heat index in Fahrenheit or Celsius and also has an option to enable deep sleep to save energy. To enable deep sleep on ESP-01 module you have to solder one wire like on this picture. You do not need to remove LED. Also to change sleep time edit this part of the code:
+  ESP.deepSleep(2*60000000); // Send to sleep for 2 minutes
+  
+  ![](http://zftlab.org/images/2014102801.jpg)
 
 #Purpose
 
