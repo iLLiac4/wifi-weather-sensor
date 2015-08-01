@@ -19,8 +19,8 @@ const char* ssid     = "iLLiac4";
 const char* password = "nonenone";
 
 const char* host = "data.sparkfun.com";
-const char* publicKey = "n1YLn05qpxTogMLKEj0L";
-const char* privateKey = "ModRmEDbBWTD0qnME2An";
+const char* publicKey = ".................";
+const char* privateKey = ".................";
 
 DHT dht(DHTPIN, DHTTYPE,30); // 30 is for cpu clock of esp8266 80Mhz
 
