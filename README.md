@@ -11,7 +11,7 @@ Low-cost Wireless Weather Monitoring System
 
 This system transmits temperature and humidity data to cloud on internet via Wifi and provides web interface to monitor those measured information.
 
-In this system, ESP8266 reads data from DHT22, DHT21 or DHT11 sensor, then, send it to data.sparkfun.com cloud system using simple HTTP protocol. For web interface, all charts are implemented with Google Chart APIs. 
+In this system, ESP8266 reads data from DHT22, DHT21 or DHT11 sensor, then send it to data.sparkfun.com cloud system using simple HTTP protocol. For web interface, all charts are implemented with Google Chart APIs. 
 
 #Prerequisites
 
@@ -26,6 +26,9 @@ Compiling and uploading is done in Arduino IDE with ESP8266 package installed. T
 - ESP8266 (Around $3 on ebay)
 - DHT22 or DHT21 (almost the same as DHT22) (Around $3 on eBay) or DHT11 (not recommended since it is not accurate and only    suitable from 0-50 celsius) 
 - Resistor 10k(Pull up)
+- 9V Battery
+- Voltage regulator LD1117 (3,3V)
+- Capacitor 1000uF 6,3V
 
 To keep the cost low, ESP8266 is used as not only controller, but also Wifi transmitter. DHT22 sensor can be replaced by any other temperature sensor. Pull up resistor is used for the input pin of ESP8266.
 Software
