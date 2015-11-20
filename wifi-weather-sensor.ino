@@ -9,8 +9,8 @@
 #include <ESP8266WiFi.h>
 #include "DHT.h"
 
-//#define DHTPIN 0     // GPIO 0 pin of ESP8266
-#define DHTPIN 2     // GPIO 2 pin of ESP8266
+#define DHTPIN 0     // GPIO 0 pin of ESP8266
+//#define DHTPIN 2     // GPIO 2 pin of ESP8266
 //#define DHTTYPE DHT11   // DHT 11
 #define DHTTYPE DHT22   // DHT 22  (AM2302)
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
@@ -57,21 +57,22 @@ void loop() {
   // Reading temperature or humidity takes about 250 milliseconds!
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
   float h = dht.readHumidity();
-  // Read temperature as Celsius (the default)
+  // Read temperature as Celsius
   float t = dht.readTemperature();
-  // Read temperature as Fahrenheit (isFahrenheit = true)
-  float f = dht.readTemperature(false);
-  
+  // Read temperature as Fahrenheit
+  float f = dht.readTemperature(true);
+
   // Check if any reads failed and exit early (to try again).
   if (isnan(h) || isnan(t) || isnan(f)) {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
+
+  // Compute heat index
+  // Must send in temp in Fahrenheit!
   
-  // Compute heat index in Fahrenheit (the default)
-  float hif = dht.computeHeatIndex(f, h);
-  // Compute heat index in Celsius (isFahreheit = false)
-  float hic = dht.computeHeatIndex(t, h, false);
+  float hi = dht.computeHeatIndex(f, h);
+  float hic = dht.convertFtoC(hi);
 
   Serial.print("Humidity: ");
   Serial.print(h);
@@ -83,13 +84,11 @@ void loop() {
   Serial.print(" *F\t");
   Serial.print("Heat index: ");
   Serial.print(hic);
-  Serial.print(" *C ");
-  Serial.print(hif);
-  Serial.println(" *F");
+  Serial.println(" *C");
 
   Serial.print("connecting to ");
   Serial.println(host);
-  
+
   // Use WiFiClient class to create TCP connections
   WiFiClient client;
   const int httpPort = 80;
@@ -97,7 +96,7 @@ void loop() {
     Serial.println("connection failed");
     return;
   }
-  
+
   // We now create a URI for the request
   String url = "/input/";
   url += publicKey;
@@ -109,7 +108,7 @@ void loop() {
   url += h;
   url += "&hidx=";
   url += hic;
-  
+
   Serial.print("Requesting URL: ");
   Serial.println(url);
   
@@ -128,5 +127,5 @@ void loop() {
   Serial.println();
   Serial.println("closing connection");
   delay(20*1000); // Send data every 20 seconds
-  ESP.deepSleep(2*60000000); // Send to sleep for 2 minutes
+  ESP.deepSleep(35*60000000); // Send to sleep for 35 minutes
 }
